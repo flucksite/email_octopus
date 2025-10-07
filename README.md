@@ -80,8 +80,8 @@ basics are there to make API calls, but not all resources are implemented yet.
   - [ ] `put` Update tag
   - [ ] `delete` Delete tag
 
-This shared will be completed over the following months, but if you feel
-inclined to help out, I'll happily accept PRs.
+I will complete the work over the following months, but if you feel inclined to
+help out, I'll happily accept PRs.
 
 ## Contributing
 
