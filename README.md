@@ -2,7 +2,7 @@
 
 A Crystal wrapper for the [EmailOctopus](htps://emailoctopus.com) AI.
 
-> **Note** The original repository hosted at [https://codeberg.org/w0u7/email_octopus](https://codeberg.org/w0u7/email_octopus).
+> **Note** The original repository is hosted at [https://codeberg.org/w0u7/email_octopus](https://codeberg.org/w0u7/email_octopus).
 
 ## Installation
 
