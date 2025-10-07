@@ -1,0 +1,6 @@
+{
+  "title": "An error occurred.",
+  "detail": "Bad request.",
+  "status": 400,
+  "type": "https://emailoctopus.com/api-documentation/v2#bad-request"
+}

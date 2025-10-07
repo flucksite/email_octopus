@@ -1,0 +1,12 @@
+{
+  "title": "An error occurred.",
+  "detail": "Unprocessable content.",
+  "status": 422,
+  "errors": [
+    {
+      "detail": "This value should not be blank.",
+      "pointer": "/email_address"
+    }
+  ],
+  "type": "https://emailoctopus.com/api-documentation/v2#unprocessable-content"
+}

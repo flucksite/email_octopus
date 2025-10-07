@@ -1,3 +1,5 @@
+require "habitat"
+
 module EmailOctopus
   class Client
     Habitat.create do
@@ -20,21 +22,23 @@ module EmailOctopus
       content_type : String = "application/json",
     )
       case method
-      when Method::GET
+      in Method::GET
         render(
           HTTP::Client.get(
             build_uri(path, query),
             headers: headers(path, content_type)
           )
         )
-      else
-        render(
-          HTTP::Client.post(
-            build_uri(path, query),
-            headers: headers(path, content_type),
-            body: body
+        {% for method in %i[post put delete] %}
+        in Method::{{method.id.upcase}}
+          render(
+            HTTP::Client.{{method.id}}(
+              build_uri(path, query),
+              headers: headers(path, content_type),
+              body: body
+            )
           )
-        )
+        {% end %}
       end
     rescue e : IO::TimeoutError
       raise TimeoutException.new(e.message)
@@ -49,8 +53,18 @@ module EmailOctopus
       HTTP::Headers{
         "Accept"        => "application/json",
         "Content-Type"  => content_type,
-        "Authorization" => "Bearer #{EmailOctopus.settings.api_key}",
+        "Authorization" => "Bearer #{EmailOctopus::Client.settings.api_key}",
       }
+    end
+
+    private def build_uri(
+      path : String,
+      query : QueryData,
+    ) : String
+      uri = URI.parse(EmailOctopus::Client.settings.endpoint)
+      uri.path = path
+      uri.query = URI::Params.encode(query)
+      uri.to_s
     end
 
     private def render(response : HTTP::Client::Response) : String
@@ -59,10 +73,8 @@ module EmailOctopus
         response.body
       when 204
         ""
-      when 422
-        raise EmailOctopus::ValidationError.from_json(response.body)
       when 400..499
-        raise EmailOctopus::RequestError.from_json(response.body)
+        raise EmailOctopus::RequestException.from_json(response.body)
       else
         raise response.body
       end
