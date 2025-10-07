@@ -2,8 +2,8 @@ require "spec"
 require "webmock"
 require "../src/email_octopus"
 
-def configure_api_key(api_key : String = api_key) : Void
-  EmailOctopus::Settings.configure do |settings|
+def configure_api_key(api_key : String = default_api_key) : Void
+  EmailOctopus::Client.configure do |settings|
     settings.api_key = api_key
   end
 end

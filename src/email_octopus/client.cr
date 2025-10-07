@@ -1,7 +1,9 @@
 require "habitat"
 
 module EmailOctopus
-  class Client
+  module Client
+    extend self
+
     Habitat.create do
       setting endpoint : String = "https://api.emailoctopus.com/"
       setting api_key : String
@@ -13,6 +15,28 @@ module EmailOctopus
       PUT
       DELETE
     end
+
+    def get(
+      resource : String,
+      query : QueryData = QueryData.new,
+    ) : String
+      perform_http_call(Method::GET, resource, query: query)
+    end
+
+    {% for method in %i[post put delete] %}
+      def {{method.id}}(
+        resource : String,
+        body : BodyData,
+        content_type : String = "application/json",
+      ) : String
+        perform_http_call(
+          Method::{{method.id.upcase}},
+          resource,
+          body: body,
+          content_type: content_type
+        )
+      end
+    {% end %}
 
     private def perform_http_call(
       method : Method,
