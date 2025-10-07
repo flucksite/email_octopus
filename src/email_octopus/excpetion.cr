@@ -13,8 +13,12 @@ module EmailOctopus
 
     delegate title, detail, status, type, errors, to: @mapper
 
+    def message
+      "#{detail} (#{status})"
+    end
+
     def to_s
-      message
+      title
     end
 
     struct Mapper
@@ -31,7 +35,8 @@ module EmailOctopus
       include JSON::Serializable
 
       getter detail : String
-      getter pointer : String
+      getter pointer : String?
+      getter parameter : String?
     end
   end
 

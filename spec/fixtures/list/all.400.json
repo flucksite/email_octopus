@@ -1,0 +1,12 @@
+{
+  "type": "https://emailoctopus.com/api-documentation/v2#bad-request",
+  "title": "An error occurred.",
+  "detail": "Bad Request.",
+  "status": 400,
+  "errors": [
+    {
+      "detail": "This value should be between 1 and 100.",
+      "parameter": "limit"
+    }
+  ]
+}
