@@ -2,6 +2,8 @@
 
 A Crystal wrapper for the [EmailOctopus](htps://emailoctopus.com) AI.
 
+> **Note**: The original repository hosted at [https://codeberg.org/w0u7/email_octopus](https://codeberg.org/w0u7/email_octopus).
+
 ## Installation
 
 1. Add the dependency to your `shard.yml`:
