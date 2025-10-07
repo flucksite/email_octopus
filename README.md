@@ -1,6 +1,6 @@
 # email_octopus
 
-A Crystal wrapper for the [EmailOctopus](htps://emailoctopus.com) API.
+A Crystal wrapper for the [EmailOctopus](htps://emailoctopus.com) AI.
 
 > **Note** The original repository is hosted at [https://codeberg.org/w0u7/email_octopus](https://codeberg.org/w0u7/email_octopus).
 
@@ -37,7 +37,9 @@ contact = EmailOctopus::Contact.create_or_update(
   @client,
   list_id: "00000000-0000-0000-0000-000000000000",
   email_address: "otto@example.com",
-  tags: %w[early-bird]
+  tags: {
+    "early-bird" => true
+  }
 )
 ```
 
