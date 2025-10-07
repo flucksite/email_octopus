@@ -1,6 +1,6 @@
 # email_octopus
 
-A Crystal wrapper for the [EmailOctopus](htps://emailoctopus.com) AI.
+A Crystal wrapper for the [EmailOctopus](htps://emailoctopus.com) API.
 
 > **Note** The original repository is hosted at [https://codeberg.org/w0u7/email_octopus](https://codeberg.org/w0u7/email_octopus).
 
