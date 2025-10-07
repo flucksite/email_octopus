@@ -1,5 +1,3 @@
-require "habitat"
-
 module EmailOctopus
   class Client
     enum Method
