@@ -1,16 +1,16 @@
 # email_octopus
 
-TODO: Write a description here
+A Crystal wrapper for the [EmailOctopus](htps://emailoctopus.com) AI.
 
 ## Installation
 
 1. Add the dependency to your `shard.yml`:
 
-   ```yaml
-   dependencies:
-     email_octopus:
-       github: your-github-user/email_octopus
-   ```
+  ```yaml
+  dependencies:
+    email_octopus:
+      github: your-github-user/email_octopus
+  ```
 
 2. Run `shards install`
 
