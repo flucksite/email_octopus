@@ -1,19 +1,18 @@
 require "habitat"
 
 module EmailOctopus
-  module Client
-    extend self
-
-    Habitat.create do
-      setting endpoint : String = "https://api.emailoctopus.com/"
-      setting api_key : String
-    end
-
+  class Client
     enum Method
       GET
       POST
       PUT
       DELETE
+    end
+
+    def initialize(
+      @api_key : String,
+      @endpoint : String = "https://api.emailoctopus.com/",
+    )
     end
 
     def get(
@@ -45,25 +44,27 @@ module EmailOctopus
       query : QueryData = QueryData.new,
       content_type : String = "application/json",
     )
-      case method
-      in Method::GET
-        render(
-          HTTP::Client.get(
-            build_uri(path, query),
-            headers: headers(path, content_type)
-          )
-        )
-        {% for method in %i[post put delete] %}
-        in Method::{{method.id.upcase}}
+      {% begin %}
+        case method
+        in Method::GET
           render(
-            HTTP::Client.{{method.id}}(
+            HTTP::Client.get(
               build_uri(path, query),
-              headers: headers(path, content_type),
-              body: body
+              headers: headers(path, content_type)
             )
           )
-        {% end %}
-      end
+          {% for method in %i[post put delete] %}
+          in Method::{{method.id.upcase}}
+            render(
+              HTTP::Client.{{method.id}}(
+                build_uri(path, query),
+                headers: headers(path, content_type),
+                body: body
+              )
+            )
+          {% end %}
+        end
+      {% end %}
     rescue e : IO::TimeoutError
       raise TimeoutException.new(e.message)
     rescue e : IO::EOFError
@@ -77,7 +78,7 @@ module EmailOctopus
       HTTP::Headers{
         "Accept"        => "application/json",
         "Content-Type"  => content_type,
-        "Authorization" => "Bearer #{EmailOctopus::Client.settings.api_key}",
+        "Authorization" => "Bearer #{@api_key}",
       }
     end
 
@@ -85,9 +86,9 @@ module EmailOctopus
       path : String,
       query : QueryData,
     ) : String
-      uri = URI.parse(EmailOctopus::Client.settings.endpoint)
+      uri = URI.parse(@endpoint)
       uri.path = path
-      uri.query = URI::Params.encode(query)
+      uri.query = QueryString.new(query).build
       uri.to_s
     end
 

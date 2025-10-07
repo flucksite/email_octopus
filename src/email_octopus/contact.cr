@@ -24,6 +24,7 @@ module EmailOctopus
     getter last_updated_at : Time
 
     def self.create_or_update(
+      client : Client,
       list_id : String,
       email_address : String,
       fields : Hash(String, FieldValue?)? = nil,
@@ -31,14 +32,14 @@ module EmailOctopus
       status : Status? = nil,
     )
       Contact.from_json(
-        Client.put(
+        client.put(
           "lists/#{list_id}/contacts",
           {
-            email_address: email_address,
-            fields:        fields,
-            tags:          tags,
-            status:        status,
-          }.to_json
+            "email_address" => email_address,
+            "fields"        => fields,
+            "tags"          => tags,
+            "status"        => status,
+          }.compact.to_json
         )
       )
     end

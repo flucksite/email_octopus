@@ -35,7 +35,7 @@ module EmailOctopus
     end
   end
 
-  module Client
+  class Client
     class TimeoutException < EmailOctopus::Exception; end
   end
 end
