@@ -16,11 +16,28 @@ A Crystal wrapper for the [EmailOctopus](htps://emailoctopus.com) AI.
 
 ## Usage
 
+Add the shard to your app:
+
 ```crystal
 require "email_octopus"
 ```
 
-TODO: Write usage instructions here
+Create a client:
+
+```Crystal
+@client =  EmailOctopus::Client.new("eo_api_key")
+```
+
+Subscribe a user to an existing list:
+
+```crystal
+contact = EmailOctopus::Contact.create_or_update(
+  @client,
+  list_id: "00000000-0000-0000-0000-000000000000",
+  email_address: "otto@example.com",
+  tags: %w[early-bird]
+)
+```
 
 ## To-do
 
@@ -62,6 +79,9 @@ basics are there to make API calls, but not all resources are implemented yet.
   - [ ] `post` Create tag
   - [ ] `put` Update tag
   - [ ] `delete` Delete tag
+
+This shared will be completed over the following months, but if you feel
+inclined to help out, I'll happily accept PRs.
 
 ## Contributing
 
