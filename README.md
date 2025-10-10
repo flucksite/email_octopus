@@ -2,7 +2,7 @@
 
 A Crystal wrapper for the [EmailOctopus](htps://emailoctopus.com) AI.
 
-> **Note** The original repository is hosted at [https://codeberg.org/w0u7/email_octopus](https://codeberg.org/w0u7/email_octopus).
+> **Note** The original repository is hosted at [https://codeberg.org/fluck/email_octopus](https://codeberg.org/fluck/email_octopus).
 
 ## Installation
 
@@ -11,7 +11,7 @@ A Crystal wrapper for the [EmailOctopus](htps://emailoctopus.com) AI.
   ```yaml
   dependencies:
     email_octopus:
-      codeberg: w0u7/email_octopus
+      codeberg: fluck/email_octopus
   ```
 
 2. Run `shards install`
@@ -89,7 +89,7 @@ help out, I'll happily accept PRs.
 
 ## Contributing
 
-1. Fork it (<https://codeberg.org/w0u7/email_octopus/fork>)
+1. Fork it (<https://codeberg.org/fluck/email_octopus/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
@@ -97,4 +97,4 @@ help out, I'll happily accept PRs.
 
 ## Contributors
 
-- [Wout](https://github.com/your-github-user) - creator and maintainer
+- [Wout](https://wout.codes) - creator and maintainer
