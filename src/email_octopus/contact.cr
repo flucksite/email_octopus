@@ -26,7 +26,7 @@ module EmailOctopus
     def self.create_or_update(
       list_id : String,
       email_address : String,
-      fields : Hash(String, FieldValue?)? = nil,
+      fields : Array(String) | Hash(String, FieldValue?)? = nil,
       tags : Hash(String, Bool)? = nil,
       status : Status? = nil,
       client : Client = Client.from_env_var,
