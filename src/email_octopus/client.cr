@@ -1,5 +1,10 @@
 module EmailOctopus
   class Client
+    API_BASE_URL     = "https://api.emailoctopus.com/"
+    API_KEY_ENV_VAR  = "EMAIL_OCTOPUS_API_KEY"
+    APPLICATION_JSON = "application/json"
+    POSTABLE_METHODS = %i[post put delete]
+
     enum Method
       GET
       POST
@@ -7,9 +12,17 @@ module EmailOctopus
       DELETE
     end
 
+    def self.from_env_var
+      unless api_key = ENV[API_KEY_ENV_VAR]?
+        raise MissingApiKeyException.new("Missing '#{API_KEY_ENV_VAR}' env var")
+      end
+
+      new(api_key)
+    end
+
     def initialize(
       @api_key : String,
-      @endpoint : String = "https://api.emailoctopus.com/",
+      @endpoint : String = API_BASE_URL,
     )
     end
 
@@ -20,11 +33,11 @@ module EmailOctopus
       perform_http_call(Method::GET, resource, query: query)
     end
 
-    {% for method in %i[post put delete] %}
+    {% for method in POSTABLE_METHODS %}
       def {{method.id}}(
         resource : String,
         body : BodyData,
-        content_type : String = "application/json",
+        content_type : String = APPLICATION_JSON,
       ) : String
         perform_http_call(
           Method::{{method.id.upcase}},
@@ -40,7 +53,7 @@ module EmailOctopus
       path : String,
       body : BodyData? = nil,
       query : QueryData = QueryData.new,
-      content_type : String = "application/json",
+      content_type : String = APPLICATION_JSON,
     )
       {% begin %}
         case method
@@ -51,7 +64,7 @@ module EmailOctopus
               headers: headers(path, content_type)
             )
           )
-          {% for method in %i[post put delete] %}
+          {% for method in POSTABLE_METHODS %}
           in Method::{{method.id.upcase}}
             render(
               HTTP::Client.{{method.id}}(

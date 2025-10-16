@@ -40,7 +40,7 @@ module EmailOctopus
     end
   end
 
-  class Client
-    class TimeoutException < EmailOctopus::Exception; end
-  end
+  class TimeoutException < EmailOctopus::Exception; end
+
+  class MissingApiKeyException < EmailOctopus::Exception; end
 end

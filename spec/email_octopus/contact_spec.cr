@@ -8,9 +8,9 @@ describe EmailOctopus::Contact do
         .to_return(body: read_fixture("contact/create_or_update.200.json").gets_to_end)
 
       contact = EmailOctopus::Contact.create_or_update(
-        default_api_client,
         list_id: "00000000-0000-0000-0000-000000000000",
-        email_address: "otto@example.com"
+        email_address: "otto@example.com",
+        client: default_api_client,
       )
     end
 
@@ -32,12 +32,12 @@ describe EmailOctopus::Contact do
         .to_return(body: read_fixture("contact/create_or_update.200.json").gets_to_end)
 
       contact = EmailOctopus::Contact.create_or_update(
-        default_api_client,
         list_id: "00000000-0000-0000-0000-000000000000",
         email_address: params[:email_address],
         fields: params[:fields],
         tags: params[:tags],
-        status: params[:status]
+        status: params[:status],
+        client: default_api_client,
       )
     end
   end

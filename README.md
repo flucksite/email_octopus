@@ -24,22 +24,32 @@ Add the shard to your app:
 require "email_octopus"
 ```
 
-Create a client:
+Subscribe a user to an existing list:
+
+```crystal
+contact = EmailOctopus::Contact.create_or_update(
+  list_id: "00000000-0000-0000-0000-000000000000",
+  email_address: "otto@example.com",
+  tags: {
+    "early-bird" => true
+  },
+)
+```
+
+This will expect the `EMAIL_OCTOPUS_API_KEY` env var to be set. Alternatively,
+you can create a client explicitly:
 
 ```Crystal
 @client =  EmailOctopus::Client.new("eo_api_key")
 ```
 
-Subscribe a user to an existing list:
+And pass in the client along with the other arguments:
 
 ```crystal
 contact = EmailOctopus::Contact.create_or_update(
-  @client,
   list_id: "00000000-0000-0000-0000-000000000000",
   email_address: "otto@example.com",
-  tags: {
-    "early-bird" => true
-  }
+  client: @client,
 )
 ```
 
@@ -97,4 +107,4 @@ help out, I'll happily accept PRs.
 
 ## Contributors
 
-- [Wout](https://wout.codes) - creator and maintainer
+- [Wout](https://wout.) - creator and maintainer

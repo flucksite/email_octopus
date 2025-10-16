@@ -24,12 +24,12 @@ module EmailOctopus
     getter last_updated_at : Time
 
     def self.create_or_update(
-      client : Client,
       list_id : String,
       email_address : String,
       fields : Hash(String, FieldValue?)? = nil,
       tags : Hash(String, Bool)? = nil,
       status : Status? = nil,
+      client : Client = Client.from_env_var,
     )
       Contact.from_json(
         client.put(
