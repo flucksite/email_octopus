@@ -18,7 +18,7 @@ module EmailOctopus
 
     getter id : String
     getter email_address : String
-    getter fields : Hash(String, FieldValue)
+    getter fields : Array(String) | Hash(String, FieldValue)
     getter tags : Array(String)
     getter created_at : Time
     getter last_updated_at : Time
@@ -26,7 +26,7 @@ module EmailOctopus
     def self.create_or_update(
       list_id : String,
       email_address : String,
-      fields : Array(String) | Hash(String, FieldValue?)? = nil,
+      fields : Hash(String, FieldValue?)? = nil,
       tags : Hash(String, Bool)? = nil,
       status : Status? = nil,
       client : Client = Client.from_env_var,
