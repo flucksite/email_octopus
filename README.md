@@ -2,17 +2,19 @@
 
 A Crystal wrapper for the [EmailOctopus](htps://emailoctopus.com) AI.
 
-> **Note** The original repository is hosted at [https://codeberg.org/fluck/email_octopus](https://codeberg.org/fluck/email_octopus).
+> [!Note]
+> The original repository is hosted at
+> [https://codeberg.org/fluck/email_octopus](https://codeberg.org/fluck/email_octopus).
 
 ## Installation
 
 1. Add the dependency to your `shard.yml`:
 
-  ```yaml
-  dependencies:
-    email_octopus:
-      codeberg: fluck/email_octopus
-  ```
+```yaml
+dependencies:
+  email_octopus:
+    codeberg: fluck/email_octopus
+```
 
 2. Run `shards install`
 
@@ -58,8 +60,8 @@ contact = EmailOctopus::Contact.create_or_update(
 This shard is still a work in progress and far from feature complete. The
 basics are there to make API calls, but not all resources are implemented yet.
 
-- [X] Client with authentication
-- [X] Exceptions
+- [x] Client with authentication
+- [x] Exceptions
 - [ ] Reties for rate limiting
 - [ ] Pagination
 - Automation
@@ -72,7 +74,7 @@ basics are there to make API calls, but not all resources are implemented yet.
   - [ ] `get` Campaign summary report
 - Contact
   - [ ] `get` Get contacts
-  - [X] `put` Create or update contact
+  - [x] `put` Create or update contact
   - [ ] `post` Create contact
   - [ ] `put` Update multiple list contacts
   - [ ] `get` Get contact
